@@ -28,11 +28,23 @@ function [raiz, x, iter, ea]=newtonraphson(x0,f,fp,tol,imax)
     end
 end
 
+function [h]=altura(t)
+    r = 4/t;
+    x = r*cos(t);
+    h = r - x;
+endfunction
+
 x0 = 4;
+tol = 0.0001;
+imax = 100;
 
-[raiz, x, iter, ea] = newtonraphson(x0,f,fp,0.0001,100);
-mprintf("%f",raiz);
-
+mprintf("i   Gráfico plotado\n");
 interv = [-2*%pi:%pi/8:2*%pi];
 plot(interv,f);
 xgrid;
+
+[raiz, x, iter, ea] = newtonraphson(x0,f,fp,tol,imax);
+mprintf("ii  Raiz utilizando método de Newton: %f\n",raiz);
+
+h = altura(raiz);
+mprintf("iii Altura máxima da peça: %f\n",h);

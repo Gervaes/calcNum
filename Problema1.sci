@@ -1,5 +1,5 @@
 //a) Construir uma função no Scilab para implementar o método da Posição Falsa
-function [raiz, x, iter, ea]=FalsaPosicao(xl,xu,f,tol,imax)
+function [raiz, x, iter, ea]=PosicaoFalsa(xl,xu,f,tol,imax)
     if(f(xl)*f(xu)>0) then
     error('Nenhuma raiz no intervalo f(xl)*f(xu) > 0');
     abort;
@@ -66,6 +66,7 @@ function [raiz, x, iter, ea]=Secantes(xi, xf, f, tol, imax)
     end;
 endfunction
 
+//c) Calcular aproximação para a raiz da equação no intervalo [3,5] com tol=0.001
 intervalo = [3,5];
 err = 0.001;
 
@@ -73,10 +74,10 @@ function [y]=f(t)
     y = 75*(%e^(-1.5*t)) + 20*(%e^(-0.075*t)) - 15;
 endfunction
 
-opcao = input("Digite o método que deseja utilizar:\n   1 - Falsa Posição\n   2 - Secantes\n");
+opcao = input("Digite o método que deseja utilizar:\n   1 - Posição Falsa\n   2 - Secantes\n");
 
 if opcao == 1 then
-    [raiz,x,iter,ea] = FalsaPosicao(intervalo(1),intervalo(2),f,err,100);
+    [raiz,x,iter,ea] = PosicaoFalsa(intervalo(1),intervalo(2),f,err,100);
 else 
     [raiz,x,iter,ea] = Secantes(intervalo(1),intervalo(2),f,err,100);
 end

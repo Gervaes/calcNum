@@ -43,6 +43,7 @@ function [y]=diagonal(x)
     y = x;
 endfunction
 
+// Método iterativo linear
 function [x,i]=MetodoIterativoLinear(x0,f,tol,imax)
     i = 1;
     x(i) = f(x0);
@@ -58,26 +59,27 @@ function [x,i]=MetodoIterativoLinear(x0,f,tol,imax)
 endfunction
 
 x0 = 3;
-
-[x,i] = MetodoIterativoLinear(x0,a,10^-5,100);
-mprintf("\nUsando equação a com x0=%d foram %d iterações:\n",x0,i);
-for i=1:1:size(x,1)
-    mprintf("%d - %f\n",i,x(i));
-end
-
-[x,i] = MetodoIterativoLinear(x0,b,10^-5,100);
-mprintf("\nUsando equação b com x0=%d foram %d iterações:\n",x0,i);
-for i=1:1:size(x,1)
-    mprintf("%d - %f\n",i,x(i));
-end
-
-[x,i] = MetodoIterativoLinear(x0,c,10^-5,100);
-mprintf("\nUsando equação c com x0=%d foram %d iterações:\n",x0,i);
-for i=1:1:size(x,1)
-    mprintf("%d - %f\n",i,x(i));
-end
-
+tol = 10^-5;
+imax = 100;
 interv = [-3:0.1:3];
+
+[x,i] = MetodoIterativoLinear(x0,a,tol,imax);
+mprintf("\nUsando equação a com x0=%d foram %d iterações:\ni       x\n",x0,i);
+for i=1:1:size(x,1)
+    mprintf("%d       %f\n",i,x(i));
+end
+
+[x,i] = MetodoIterativoLinear(x0,b,tol,imax);
+mprintf("\nUsando equação b com x0=%d foram %d iterações:\ni       x\n",x0,i);
+for i=1:1:size(x,1)
+    mprintf("%d       %f\n",i,x(i));
+end
+
+[x,i] = MetodoIterativoLinear(x0,c,tol,imax);
+mprintf("\nUsando equação c com x0=%d foram %d iterações:\ni       x\n",x0,i);
+for i=1:1:size(x,1)
+    mprintf("%d       %f\n",i,x(i));
+end
 
 subplot(221);
 plot(interv,a,interv,diagonal);
